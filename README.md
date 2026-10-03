@@ -21,6 +21,16 @@ Public websites only: IP addresses, private networks and non-standard ports are 
 
 The server runs on Weio's infrastructure and its source code is not published. This repository holds the public interface: the tool schemas ([`tools.json`](tools.json)), the registry entry ([`server.json`](server.json)), client configuration files and examples. Issues and questions are welcome here.
 
+## Agents can buy a key themselves (MPP)
+
+An agent does not need a person to go through a checkout page. `POST https://weio.ai/api/agent/credits/100` ($1, 100 calls) or `POST https://weio.ai/api/agent/credits/1000` ($9, 1,000 calls) answers `402 Payment Required` with a [Machine Payments Protocol](https://mpp.dev) challenge (Stripe, Shared Payment Token, card). Retry with the payment credential and the response carries a `wk_` key, the credits and an itemized receipt. For example, with Link's agent wallet:
+
+```bash
+npx @stripe/link-cli mpp pay https://weio.ai/api/agent/credits/100 -X POST
+```
+
+Payments settle to Weio, Inc. through Stripe. Stablecoin payment is not offered. Discovery document: [`https://weio.ai/openapi.json`](https://weio.ai/openapi.json).
+
 ## Connect
 
 **Claude Code**
