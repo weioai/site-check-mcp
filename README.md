@@ -31,6 +31,39 @@ npx @stripe/link-cli mpp pay https://weio.ai/api/agent/credits/100 -X POST
 
 Payments settle to Weio, Inc. through Stripe. Stablecoin payment is not offered. Discovery document: [`https://weio.ai/openapi.json`](https://weio.ai/openapi.json).
 
+## Use the same checks through your existing platform account
+
+These routes are alternatives for teams that already use RapidAPI or Apify. They bill through that platform's account and never send you to a Weio checkout. They are separate services from the hosted `weio.ai/mcp` server above.
+
+**RapidAPI MCP.** RapidAPI makes each of these APIs available as MCP tools at `https://mcp.rapidapi.com`. Use your own RapidAPI key and plan; see each API's pricing page for current plan terms.
+
+```bash
+# Claude Code: repeat with any host in the list below.
+claude mcp add --transport http rapidapi-site-check https://mcp.rapidapi.com \
+  --header "x-api-host: website-facts-and-https-check.p.rapidapi.com" \
+  --header "x-rapidapi-key: YOUR_RAPIDAPI_KEY"
+
+# Desktop clients that run a local stdio bridge, such as Cursor:
+npx mcp-remote https://mcp.rapidapi.com \
+  --header "x-api-host: website-facts-and-https-check.p.rapidapi.com" \
+  --header "x-rapidapi-key: YOUR_RAPIDAPI_KEY"
+```
+
+Choose one `x-api-host`: [`website facts + HTTPS check`](https://rapidapi.com/weioinc/api/website-facts-and-https-check), [`domain and email security`](https://rapidapi.com/weioinc/api/domain-email-security-spf-dmarc-mx-whois), [`website technology detector`](https://rapidapi.com/weioinc/api/website-technology-detector-cms-ecommerce-analytics), or [`website contact details extractor`](https://rapidapi.com/weioinc/api/website-contact-details-extractor-emails-phones-socials). Their host values are respectively `website-facts-and-https-check.p.rapidapi.com`, `domain-email-security-spf-dmarc-mx-whois.p.rapidapi.com`, `website-technology-detector-cms-ecommerce-analytics.p.rapidapi.com`, and `website-contact-details-extractor-emails-phones-socials.p.rapidapi.com`.
+
+**Apify MCP.** Apify exposes each actor as tools through `https://mcp.apify.com`; use an Apify API token from your own account. Pay-per-event charges, if an actor has them, are billed by Apify to that account.
+
+```bash
+claude mcp add --transport http apify-weio-tech-stack \
+  'https://mcp.apify.com?tools=weio/website-tech-stack-detector' \
+  --header "Authorization: Bearer YOUR_APIFY_TOKEN"
+
+npx mcp-remote 'https://mcp.apify.com?tools=weio/website-tech-stack-detector' \
+  --header "Authorization: Bearer YOUR_APIFY_TOKEN"
+```
+
+Available Weio actor tool routes: `weio/hacked-website-seo-spam-checker`, `weio/local-business-website-lead-qualifier`, `weio/local-business-website-audit`, `weio/website-contact-details-extractor`, `weio/website-tech-stack-detector`, `weio/domain-whois-dns-email-security-checker`, `weio/lighthouse-mobile-median-audit`, `weio/broken-link-checker-bulk`, `weio/website-screenshot-phone-desktop`, and `weio/website-to-pdf-bulk`.
+
 ## Install as a plugin or extension
 
 **Claude Code plugin** (MCP server plus a skill that tells Claude when to use each tool; asks for an optional key, stored in your keychain):
