@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "weio-site-check": {
+      "serverUrl": "https://weio.ai/mcp"
+    }
+  }
+}

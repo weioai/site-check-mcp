@@ -31,6 +31,34 @@ npx @stripe/link-cli mpp pay https://weio.ai/api/agent/credits/100 -X POST
 
 Payments settle to Weio, Inc. through Stripe. Stablecoin payment is not offered. Discovery document: [`https://weio.ai/openapi.json`](https://weio.ai/openapi.json).
 
+## Install as a plugin or extension
+
+**Claude Code plugin** (MCP server plus a skill that tells Claude when to use each tool; asks for an optional key, stored in your keychain):
+
+```
+/plugin marketplace add weioai/site-check-mcp
+/plugin install weio-site-check@weio
+```
+
+**VS Code (GitHub Copilot), Copilot CLI and Kiro:** an [Agent Plugins](https://agent-plugins.org) package lives in [`agent-plugin/`](agent-plugin). In Kiro: Powers > Add Custom Power > Import power from GitHub > `https://github.com/weioai/site-check-mcp/tree/main/agent-plugin`. To add only the server to VS Code: [install link](vscode:mcp/install?%7B%22name%22%3A%22weio-site-check%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A//weio.ai/mcp%22%7D).
+
+**Gemini CLI extension** (with the same skill as context in [`GEMINI.md`](GEMINI.md)):
+
+```bash
+gemini extensions install https://github.com/weioai/site-check-mcp
+gemini extensions config weio-site-check   # optional: paste a wk_ key; leave blank for the free tier
+```
+
+**Google Antigravity:** plugin manifest in [`antigravity/`](antigravity).
+
+**OpenAI Responses API** (bring your own server; the key is optional):
+
+```json
+{ "type": "mcp", "server_label": "weio", "server_url": "https://weio.ai/mcp", "authorization": "wk_...", "require_approval": "never" }
+```
+
+**Goose:** Extensions > Add custom extension > Streamable HTTP, endpoint `https://weio.ai/mcp`, optional header `Authorization: Bearer wk_...`.
+
 ## Connect
 
 **Claude Code**
@@ -55,7 +83,7 @@ claude mcp add --transport http weio-site-check https://weio.ai/mcp --header "Au
 { "servers": { "weio-site-check": { "type": "http", "url": "https://weio.ai/mcp" } } }
 ```
 
-**Gemini CLI:** `gemini extensions install https://github.com/weioai/site-check-mcp`, or add to `settings.json`:
+**Gemini CLI** without the extension, in `settings.json`:
 
 ```json
 { "mcpServers": { "weio-site-check": { "httpUrl": "https://weio.ai/mcp" } } }

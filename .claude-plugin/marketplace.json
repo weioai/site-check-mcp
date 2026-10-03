@@ -1,0 +1,38 @@
+{
+  "name": "weio",
+  "owner": {
+    "name": "Weio",
+    "email": "sales@weio.ai",
+    "url": "https://weio.ai"
+  },
+  "metadata": {
+    "description": "Claude Code plugins published by Weio, Inc.",
+    "version": "1.3.0"
+  },
+  "plugins": [
+    {
+      "name": "weio-site-check",
+      "source": "./",
+      "description": "Check a website's HTTPS certificate and browser warnings, read the public business facts on its homepage (CMS, role emails, phones, social links), and look up businesses in Weio's small local index, through Weio's hosted MCP server.",
+      "version": "1.3.0",
+      "author": {
+        "name": "Weio",
+        "email": "sales@weio.ai",
+        "url": "https://weio.ai"
+      },
+      "homepage": "https://weio.ai/services/site-check-api.html?utm_source=claude-plugin&utm_medium=plugin&utm_campaign=site-check-mcp",
+      "repository": "https://github.com/weioai/site-check-mcp",
+      "license": "MIT",
+      "keywords": [
+        "https",
+        "ssl",
+        "certificate",
+        "website",
+        "audit",
+        "small-business",
+        "mcp"
+      ],
+      "category": "development"
+    }
+  ]
+}

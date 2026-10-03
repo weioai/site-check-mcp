@@ -1,10 +1,22 @@
 {
   "name": "weio-site-check",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Website facts for agents: HTTPS/certificate checks, public site info, small local-business search (hosted, 10 free calls/day).",
   "mcpServers": {
     "weio-site-check": {
-      "httpUrl": "https://weio.ai/mcp"
+      "httpUrl": "https://weio.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${WEIO_API_KEY:-}"
+      }
     }
-  }
+  },
+  "contextFileName": "GEMINI.md",
+  "settings": [
+    {
+      "name": "Weio API key (optional)",
+      "description": "wk_... key from https://weio.ai/services/site-check-api.html. Leave blank for 10 free calls a day.",
+      "envVar": "WEIO_API_KEY",
+      "sensitive": true
+    }
+  ]
 }

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "weio-site-check",
+  "description": "Check a website's HTTPS certificate and browser warnings, read the public business facts on its homepage (CMS, role emails, phones, social links), and look up businesses in Weio's small local index, through Weio's hosted MCP server."
+}
