@@ -1,0 +1,10 @@
+{
+  "name": "weio-site-check",
+  "version": "1.2.1",
+  "description": "Website facts for agents: HTTPS/certificate checks, public site info, small local-business search (hosted, 10 free calls/day).",
+  "mcpServers": {
+    "weio-site-check": {
+      "httpUrl": "https://weio.ai/mcp"
+    }
+  }
+}

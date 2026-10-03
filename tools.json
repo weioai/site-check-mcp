@@ -1,0 +1,82 @@
+[
+  {
+    "name": "check_https",
+    "title": "Check a website's HTTPS certificate",
+    "description": "Checks what a visitor sees when opening a domain in a browser, for both example.com and www.example.com: whether the site loads securely, or shows a full-page privacy warning / 'Not secure', and why (expired certificate, name mismatch, self-signed, no HTTPS, redirect problems, unreachable). Returns a cause code, whether a browser shows a warning, the certificate expiry date and a one-sentence plain-English explanation per address. Public websites only.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Domain or URL, e.g. example.com or https://www.example.com/page"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "additionalProperties": false
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "openWorldHint": true,
+      "idempotentHint": true
+    }
+  },
+  {
+    "name": "site_info",
+    "title": "Public business facts from a website",
+    "description": "Reads a business website's homepage and returns what the business publishes about itself: page title and description, language, CMS/website builder (WordPress, Wix, Squarespace, Shopify...), whether it has a mobile viewport tag, role contact emails (info@, sales@, office@...; personal-name addresses are deliberately left out), phone numbers, social profile links and the contact/about page URL. Also flags a broken HTTPS certificate. Public websites only; one homepage fetch.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Domain or URL, e.g. example.com or https://www.example.com/page"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "additionalProperties": false
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "openWorldHint": true,
+      "idempotentHint": true
+    }
+  },
+  {
+    "name": "find_businesses",
+    "title": "Find businesses in Weio's small local scan index",
+    "description": "Returns up to 10 public business records from Weio's currently small, dated local scan index. Initial coverage is dental-category businesses in Fresno County, California, scanned 2026-09-30. Each record has business name, website, a phone-layout flag and scan/source scope; it deliberately does not return email addresses or personal data. This is not a complete directory or ranking.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Business category; currently dentists/dental only."
+        },
+        "area": {
+          "type": "string",
+          "description": "County and state; currently Fresno County, CA only."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Maximum records to return (default 10)."
+        }
+      },
+      "required": [
+        "category",
+        "area"
+      ],
+      "additionalProperties": false
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "openWorldHint": false,
+      "idempotentHint": true
+    }
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.weio/site-check",
+  "title": "Weio site check",
+  "description": "Website facts for agents: HTTPS/certificate checks, public site info, small local-business search.",
+  "version": "1.2.1",
+  "websiteUrl": "https://weio.ai/services/site-check-api.html",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://weio.ai/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. 'Bearer wk_...' API key from https://weio.ai/services/site-check-api.html ($9 per 1,000 calls). Without it: 10 free calls per day.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/weioai/site-check-mcp",
+    "source": "github"
+  }
+}
