@@ -17,7 +17,9 @@
       "additionalProperties": false
     },
     "annotations": {
+      "title": "Check a website's HTTPS certificate",
       "readOnlyHint": true,
+      "destructiveHint": false,
       "openWorldHint": true,
       "idempotentHint": true
     }
@@ -40,7 +42,9 @@
       "additionalProperties": false
     },
     "annotations": {
+      "title": "Public business facts from a website",
       "readOnlyHint": true,
+      "destructiveHint": false,
       "openWorldHint": true,
       "idempotentHint": true
     }
@@ -74,7 +78,9 @@
       "additionalProperties": false
     },
     "annotations": {
+      "title": "Find businesses in Weio's small local scan index",
       "readOnlyHint": true,
+      "destructiveHint": false,
       "openWorldHint": false,
       "idempotentHint": true
     }
