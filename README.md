@@ -82,6 +82,8 @@ gemini extensions install https://github.com/weioai/site-check-mcp
 gemini extensions config weio-site-check   # optional: paste a wk_ key; leave blank for the free tier
 ```
 
+**Raycast.** The [Raycast Store extension](https://www.raycast.com/) connects to the free tier automatically (10 calls a day). To use paid credits, add your `wk_...` key in your own Raycast MCP client configuration as either `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
+
 **Google Antigravity:** plugin manifest in [`antigravity/`](antigravity).
 
 **OpenAI Responses API** (bring your own server; the key is optional):
