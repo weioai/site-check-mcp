@@ -11,7 +11,7 @@ A hosted [Model Context Protocol](https://modelcontextprotocol.io) server that g
 | `find_businesses(category, area)` | Up to 10 records from a small, dated local scan index (currently dental businesses in Fresno County, California, scanned 2026-09-30). Name, website and a phone-layout flag; no emails or personal data. |
 
 - **Endpoint:** `https://weio.ai/mcp` (streamable HTTP, stateless)
-- **Free:** 10 calls a day, no key, no signup
+- **Free:** up to 10 calls a day, no key, no signup
 - **Paid:** an API key with 1,000 calls for $9 from [weio.ai/services/site-check-api.html](https://weio.ai/services/site-check-api.html?utm_source=github&utm_medium=repo&utm_campaign=site-check-mcp). Send it as `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
 - **Registry:** listed in the official MCP registry as [`ai.weio/site-check`](https://registry.modelcontextprotocol.io/v0/servers?search=ai.weio)
 
@@ -72,7 +72,7 @@ gemini extensions install https://github.com/weioai/site-check-mcp
 gemini extensions config weio-site-check   # optional: paste a wk_ key; leave blank for the free tier
 ```
 
-**Raycast.** The [Raycast Store extension](https://www.raycast.com/) connects to the free tier automatically (10 calls a day). To use paid credits, add your `wk_...` key in your own Raycast MCP client configuration as either `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
+**Raycast.** The [Raycast Store extension](https://www.raycast.com/) connects to the free tier automatically (up to 10 calls a day). To use paid credits, add your `wk_...` key in your own Raycast MCP client configuration as either `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
 
 **Google Antigravity:** plugin manifest in [`antigravity/`](antigravity).
 
@@ -131,7 +131,7 @@ More in [`examples/`](examples). The same checks are also available as plain HTT
 ## Limits and errors
 
 - 30 calls per minute per key. A call that cannot run because the server is busy is not charged.
-- Free tier: 10 calls a day per client address. When it runs out, the tool result says so and links the key page.
+- Free tier: up to 10 calls a day per client address. When it runs out, the tool result says so and links the key page.
 - Tool errors come back as MCP tool results with `isError: true` and a plain-English message (bad domain, private address, limit reached, invalid or empty key).
 - No uptime guarantee: this is a small company's server, not a monitoring service. Unused credits are refunded if it does not work for you.
 
