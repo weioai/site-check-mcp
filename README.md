@@ -12,7 +12,7 @@ A hosted [Model Context Protocol](https://modelcontextprotocol.io) server that g
 
 - **Endpoint:** `https://weio.ai/mcp` (streamable HTTP, stateless)
 - **Free:** up to 10 calls a day, no key, no signup
-- **Paid:** an API key with 1,000 calls for $9 from [weio.ai/services/site-check-api.html](https://weio.ai/services/site-check-api.html?utm_source=github&utm_medium=repo&utm_campaign=site-check-mcp). Send it as `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
+- **Keys:** send an existing `wk_...` key as `Authorization: Bearer wk_...` or `X-API-Key: wk_...`. Project information: [weio.ai](https://weio.ai/).
 - **Registry:** listed in the official MCP registry as [`ai.weio/site-check`](https://registry.modelcontextprotocol.io/v0/servers?search=ai.weio)
 
 Public websites only: IP addresses, private networks and non-standard ports are refused. `site_info` reads one homepage and does not crawl.
