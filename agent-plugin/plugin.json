@@ -5,10 +5,8 @@
   "description": "Check a website's HTTPS certificate and browser warnings, read the public business facts on its homepage (CMS, role emails, phones, social links), and look up businesses in Weio's small local index, through Weio's hosted MCP server.",
   "author": {
     "name": "Weio",
-    "email": "sales@weio.ai",
     "url": "https://weio.ai"
   },
-  "homepage": "https://weio.ai/services/site-check-api.html?utm_source=agent-plugin&utm_medium=plugin&utm_campaign=site-check-mcp",
   "repository": "https://github.com/weioai/site-check-mcp",
   "license": "MIT",
   "keywords": [
