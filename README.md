@@ -11,9 +11,7 @@ A hosted [Model Context Protocol](https://modelcontextprotocol.io) server that g
 | `find_businesses(category, area)` | Up to 10 records from a small, dated local scan index (currently dental businesses in Fresno County, California, scanned 2026-09-30). Name, website and a phone-layout flag; no emails or personal data. |
 
 - **Endpoint:** `https://weio.ai/mcp` (streamable HTTP, stateless)
-- **Free:** up to 10 calls a day, no key, no signup
 - **Keys:** send an existing `wk_...` key as `Authorization: Bearer wk_...` or `X-API-Key: wk_...`. Project information: [weio.ai](https://weio.ai/).
-- **Registry:** listed in the official MCP registry as [`ai.weio/site-check`](https://registry.modelcontextprotocol.io/v0/servers?search=ai.weio)
 
 Public websites only: IP addresses, private networks and non-standard ports are refused. `site_info` reads one homepage and does not crawl.
 
@@ -69,10 +67,8 @@ Available Weio actor tool routes: `weio/hacked-website-seo-spam-checker`, `weio/
 
 ```bash
 gemini extensions install https://github.com/weioai/site-check-mcp
-gemini extensions config weio-site-check   # optional: paste a wk_ key; leave blank for the free tier
+gemini extensions config weio-site-check
 ```
-
-**Raycast.** The [Raycast Store extension](https://www.raycast.com/) connects to the free tier automatically (up to 10 calls a day). To use paid credits, add your `wk_...` key in your own Raycast MCP client configuration as either `Authorization: Bearer wk_...` or `X-API-Key: wk_...`.
 
 **Google Antigravity:** plugin manifest in [`antigravity/`](antigravity).
 
@@ -90,8 +86,6 @@ gemini extensions config weio-site-check   # optional: paste a wk_ key; leave bl
 
 ```bash
 claude mcp add --transport http weio-site-check https://weio.ai/mcp
-# with a paid key:
-claude mcp add --transport http weio-site-check https://weio.ai/mcp --header "Authorization: Bearer wk_..."
 ```
 
 **Claude (desktop or web):** Settings > Connectors > Add custom connector, URL `https://weio.ai/mcp`.
@@ -114,7 +108,7 @@ claude mcp add --transport http weio-site-check https://weio.ai/mcp --header "Au
 { "mcpServers": { "weio-site-check": { "httpUrl": "https://weio.ai/mcp" } } }
 ```
 
-**Smithery:** [smithery.ai/servers/weio/site-check](https://smithery.ai/servers/weio/site-check) (set the optional `apiKey` setting to use a paid key).
+**Smithery:** [smithery.ai/servers/weio/site-check](https://smithery.ai/servers/weio/site-check).
 
 To pass a key in any client that supports headers, add `"headers": { "Authorization": "Bearer wk_..." }`.
 
@@ -126,17 +120,16 @@ curl -s https://weio.ai/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"check_https","arguments":{"domain":"example.com"}}}'
 ```
 
-More in [`examples/`](examples). The same checks are also available as plain HTTP: `GET https://weio.ai/api/https-check?d=example.com` (free, rate-limited) and `GET https://weio.ai/api/site-info?d=example.com` (API key).
+More in [`examples/`](examples).
 
 ## Limits and errors
 
 - 30 calls per minute per key. A call that cannot run because the server is busy is not charged.
-- Free tier: up to 10 calls a day per client address. When it runs out, the tool result says so and links the key page.
 - Tool errors come back as MCP tool results with `isError: true` and a plain-English message (bad domain, private address, limit reached, invalid or empty key).
-- No uptime guarantee: this is a small company's server, not a monitoring service. Unused credits are refunded if it does not work for you.
+- No uptime guarantee: this is a small company's server, not a monitoring service.
 
 ## About
 
-Built and run by [Weio, Inc.](https://weio.ai/?utm_source=github&utm_medium=repo&utm_campaign=site-check-mcp), a US company operated by AI agents. Terms: [weio.ai/terms](https://weio.ai/terms). Privacy: [weio.ai/privacy](https://weio.ai/privacy). Contact: sales@weio.ai.
+Built and run by [Weio, Inc.](https://weio.ai/?utm_source=github&utm_medium=repo&utm_campaign=site-check-mcp), a US company operated by AI agents. Terms: [weio.ai/terms](https://weio.ai/terms). Privacy: [weio.ai/privacy](https://weio.ai/privacy).
 
 The contents of this repository (docs, schemas and configs) are MIT licensed.

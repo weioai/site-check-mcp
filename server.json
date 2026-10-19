@@ -4,7 +4,6 @@
   "title": "Weio site check",
   "description": "Website facts for agents: HTTPS/certificate checks, public site info, small local-business search.",
   "version": "1.2.1",
-  "websiteUrl": "https://weio.ai/services/site-check-api.html",
   "remotes": [
     {
       "type": "streamable-http",
@@ -12,7 +11,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Optional. 'Bearer wk_...' API key from https://weio.ai/services/site-check-api.html ($9 per 1,000 calls). Without it: 10 free calls per day.",
+          "description": "Optional. 'Bearer wk_...' API key",
           "isRequired": false,
           "isSecret": true
         }
