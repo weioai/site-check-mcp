@@ -2,18 +2,19 @@
 
 <!-- mcp-name: ai.weio/site-check -->
 
-A hosted [Model Context Protocol](https://modelcontextprotocol.io) server that gives AI agents three read-only tools:
+A hosted [Model Context Protocol](https://modelcontextprotocol.io) server. This repository documents its read-only `check_https` tool.
 
-| Tool | What it returns |
-|---|---|
-| `check_https(domain)` | For `example.com` and `www.example.com`: whether a browser loads the site securely or shows a full-page privacy warning / "Not secure", and why (expired certificate, name mismatch, self-signed, no HTTPS, redirect problems, unreachable), plus the certificate expiry date and a one-sentence explanation. |
-| `site_info(domain)` | What a business publishes on its homepage: title and description, language, CMS or site builder (WordPress, Wix, Squarespace, Shopify...), mobile viewport tag, role contact emails (info@, sales@...; personal-name addresses are left out on purpose), phone numbers, social links and the contact/about page. |
-| `find_businesses(category, area)` | Up to 10 records from a small, dated local scan index (currently dental businesses in Fresno County, California, scanned 2026-09-30). Name, website and a phone-layout flag; no emails or personal data. |
-
-- **Endpoint:** `https://weio.ai/mcp` (streamable HTTP, stateless)
-- **Keys:** send an existing `wk_...` key as `Authorization: Bearer wk_...` or `X-API-Key: wk_...`. Project information: [weio.ai](https://weio.ai/).
-
-Public websites only: IP addresses, private networks and non-standard ports are refused. `site_info` reads one homepage and does not crawl.
+> **Status:** this repository documents Weio's original site-check MCP tools. The hosted server at
+> `https://weio.ai/mcp` now serves `check_https` plus the Weio participant-registry tools
+> (`registry_join`, `registry_confirm_key`, `registry_verify`); see https://weio.ai/spec/ for those.
+> `find_businesses` has been retired. No keys are sold.
+>
+> | Tool | What it returns |
+> |---|---|
+> | `check_https(domain)` | For `example.com` and `www.example.com`: whether a browser loads the site securely or shows a full-page privacy warning / "Not secure", and why (expired certificate, name mismatch, self-signed, no HTTPS, redirect problems, unreachable), plus the certificate expiry date and a one-sentence explanation. |
+>
+> - **Endpoint:** `https://weio.ai/mcp` (streamable HTTP, stateless)
+> - `check_https` needs no key.
 
 ## What this repository is
 
@@ -54,7 +55,7 @@ Available Weio actor tool routes: `weio/hacked-website-seo-spam-checker`, `weio/
 
 ## Install as a plugin or extension
 
-**Claude Code plugin** (MCP server plus a skill that tells Claude when to use each tool; asks for an optional key, stored in your keychain):
+**Claude Code plugin** (MCP server plus a skill that tells Claude when to use each tool):
 
 ```
 /plugin marketplace add weioai/site-check-mcp
@@ -67,18 +68,17 @@ Available Weio actor tool routes: `weio/hacked-website-seo-spam-checker`, `weio/
 
 ```bash
 gemini extensions install https://github.com/weioai/site-check-mcp
-gemini extensions config weio-site-check
 ```
 
 **Google Antigravity:** plugin manifest in [`antigravity/`](antigravity).
 
-**OpenAI Responses API** (bring your own server; the key is optional):
+**OpenAI Responses API** (bring your own server):
 
 ```json
-{ "type": "mcp", "server_label": "weio", "server_url": "https://weio.ai/mcp", "authorization": "wk_...", "require_approval": "never" }
+{ "type": "mcp", "server_label": "weio", "server_url": "https://weio.ai/mcp", "require_approval": "never" }
 ```
 
-**Goose:** Extensions > Add custom extension > Streamable HTTP, endpoint `https://weio.ai/mcp`, optional header `Authorization: Bearer wk_...`.
+**Goose:** Extensions > Add custom extension > Streamable HTTP, endpoint `https://weio.ai/mcp`.
 
 ## Connect
 
@@ -110,8 +110,6 @@ claude mcp add --transport http weio-site-check https://weio.ai/mcp
 
 **Smithery:** [smithery.ai/servers/weio/site-check](https://smithery.ai/servers/weio/site-check).
 
-To pass a key in any client that supports headers, add `"headers": { "Authorization": "Bearer wk_..." }`.
-
 ## Try it without a client
 
 ```bash
@@ -124,8 +122,7 @@ More in [`examples/`](examples).
 
 ## Limits and errors
 
-- 30 calls per minute per key. A call that cannot run because the server is busy is not charged.
-- Tool errors come back as MCP tool results with `isError: true` and a plain-English message (bad domain, private address, limit reached, invalid or empty key).
+- Tool errors come back as MCP tool results with `isError: true` and a plain-English message (bad domain, private address, limit reached).
 - No uptime guarantee: this is a small company's server, not a monitoring service.
 
 ## About

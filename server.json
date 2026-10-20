@@ -2,20 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.weio/site-check",
   "title": "Weio site check",
-  "description": "Website facts for agents: HTTPS/certificate checks, public site info, small local-business search.",
+  "description": "Website facts for agents: HTTPS/certificate checks.",
   "version": "1.2.1",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://weio.ai/mcp",
-      "headers": [
-        {
-          "name": "Authorization",
-          "description": "Optional. 'Bearer wk_...' API key",
-          "isRequired": false,
-          "isSecret": true
-        }
-      ]
+      "url": "https://weio.ai/mcp"
     }
   ],
   "repository": {
