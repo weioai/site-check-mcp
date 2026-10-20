@@ -1,7 +1,7 @@
 {
   "name": "weio-site-check",
   "version": "1.3.0",
-  "description": "Check a website's HTTPS certificate and browser warnings, read the public business facts on its homepage (CMS, role emails, phones, social links), and look up businesses in Weio's small local index, through Weio's hosted MCP server.",
+  "description": "Check a website's HTTPS certificate and browser warnings through Weio's hosted MCP server.",
   "author": {
     "name": "Weio",
     "url": "https://weio.ai"
@@ -17,23 +17,10 @@
     "small-business",
     "mcp"
   ],
-  "userConfig": {
-    "weio_api_key": {
-      "type": "string",
-      "title": "Weio API key (optional)",
-      "description": "Optional wk_... key",
-      "sensitive": true,
-      "required": false,
-      "default": ""
-    }
-  },
   "mcpServers": {
     "weio-site-check": {
       "type": "http",
-      "url": "https://weio.ai/mcp",
-      "headers": {
-        "X-API-Key": "${user_config.weio_api_key}"
-      }
+      "url": "https://weio.ai/mcp"
     }
   }
 }
